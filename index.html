@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+    rel="stylesheet"
+    />
+    <style>
+        body {
+                background-color: #161719;
+                color: #D8D9DA;
+                text-align: center;
+                font-family: 'Montserrat', sans-serif;
+        }
+        main {
+                padding-top: 5%;
+        }
+        footer{ 
+                background-color:#BDBDBD;
+        }
+    </style>
+    <title>Mi IP - Meu IP - My IP</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Mi IP - Meu IP - My IP</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="container-fluid">
+
+            <div class="card text-center text-white" style="background-color:#212124;">
+                <div class="card-body">
+                    <h5 class="card-title">IPv4</h5>
+                        <p class="card-text">
+                            <?php
+                                if (!empty($ip)) {
+                                    echo "<div class='fs-2 fw-bold'><span class='text-success'>$ip</span></div>";
+                                }else {
+                                    echo "<div class='fs-2 fw-bold'><span class='text-warning'>Sem IPv4</span></div>";
+                                }
+                                ?>
+                        </p>
+                </div>
+            </div>
+            <br/>
+            <div class="card text-center text-white" style="background-color:#212124;">
+                <div class="card-body">
+                    <h5 class="card-title">IPv6</h5>
+                        <p class="card-text">
+                            <?php
+                                if (!empty($ip6)) {
+                                    echo "<div class='fs-2 fw-bold'><span class='text-success'>$ip6 <i class='fas fa-heart'></i></span></div>";
+                                }else {
+                                    echo "<div class='fs-2 fw-bold'><span class='text-danger'>Sem IPv6 <i class='fas fa-heart-broken'></i></span></div>";
+                                }
+                            ?>
+                        </p>
+                </div>
+            </div>
+            <br/>
+            <div class="card text-center text-white" style="background-color:#212124;">
+                <div class="card-body">
+                    <h5 class="card-title">Conex  o</h5>
+                        <p class="card-text">
+                            <?php
+                                if (!empty($ip6) && strlen(inet_pton($ip6)) <= 4) {
+                                    echo "<div class='fs-2 fw-bold'><span class='text-danger'><i class='fas fa-heart-broken'></i> Preferindo IPv4 <i class=$
+                                } else {
+                                    echo "<div class='fs-2 fw-bold'><span class='text-success'><i class='fas fa-heart'></i> Preferindo IPv6 <i class='fas f$
+                                }
+                            ?>
+                        </p>
+                </div>
+            </div>
+
+        </div>
+
+<script type="application/javascript">
+  function getIP(json) {
+   console.log("My public IP address is: ", json.ip);
+  }
+</script>
+
+<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+        </main>
+</body>
+    <!-- Footer -->
+    <footer class="text-center text-white fixed-botton" style="background-color:#212124;">
+    <!-- Copyright -->
+            <div class="text-center pb-4" style="background-color: rgba(0, 0, 0, 0.2);style=font-size: 0.8em;">
+                        <?php echo date("Y"); ?> Copyright:
+                    <a class="text-white" href="https://alfa.net.py/">Alfa.net.py</a>
+            </div>
+    <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+</html>
