@@ -44,7 +44,6 @@
 
     <main>
         <div class="container-fluid">
-
             <div class="card text-center text-white" style="background-color:#212124;">
                 <div class="card-body">
                     <h5 class="card-title">IPv4</h5>
@@ -60,8 +59,8 @@
                 <div class="card-body">
                     <h5 class="card-title">IPv6</h5>
                         <p class="card-text">
-                            <div class="fs-2 fw-bold text-success"><span class="fas fa-heart" id="ipv6Show-success"></span></div>
-                            <div class="fs-2 fw-bold text-danger"><span class="fas fa-heart-broken" id="ipv6Show-danger"></span></div>
+                            <div class="fs-2 fw-bold"><span class="text-success" id="ipv6Show-success"></span></div>
+                            <div class="fs-2 fw-bold"><span class="text-danger" id="ipv6Show-danger"></span></div>
                         </p>
                 </div>
             </div>
@@ -70,13 +69,18 @@
                 <div class="card-body">
                     <h5 class="card-title">Conexão</h5>
                         <p class="card-text">
-                            <?php
-                                if (!empty($ip6) && strlen(inet_pton($ip6)) <= 4) {
-                                    echo "<div class='fs-2 fw-bold'><span class='text-danger'><i class='fas fa-heart-broken'></i> Preferindo IPv4 <i class='fas fa-heart-broken'></i></span></div>";
-                                } else {
-                                    echo "<div class='fs-2 fw-bold'><span class='text-success'><i class='fas fa-heart'></i> Preferindo IPv6 <i class='fas fa-heart'></i></span></div>";
-                                }
-                            ?>
+                            <div class="fs-2 fw-bold"><span class="text-success" id="ipShow-success"></span></div>
+                            <div class="fs-2 fw-bold"><span class="text-danger" id="ipShow-danger"></span></div>
+                        </p>
+                </div>
+            </div>
+            <br/>
+            <div class="card text-center text-white" style="background-color:#212124;">
+                <div class="card-body">
+                    <h5 class="card-title">Organização</h5>
+                        <p class="card-text">
+                            <div class="fs-2 fw-bold"><span class="text-success" id="orgShow-success"></span></div>
+                            <div class="fs-2 fw-bold"><span class="text-danger" id="orgShow-danger"></span></div>
                         </p>
                 </div>
             </div>
@@ -92,7 +96,6 @@
                 }
             }
         </script>
-
         <script type="application/javascript" src="https://ip4.seeip.org/jsonip?callback=getIP"></script>
 
         <script type="text/javascript">
@@ -104,21 +107,39 @@
                 }
             }
         </script>
-
         <script type="application/javascript" src="https://ip6.seeip.org/jsonip?callback=getIP"></script>
 
+        <script type="text/javascript">
+            function getIP(json) {
+                if (json.ip && length <= 4) {
+                    document.getElementById("ipShow-success").innerHTML = "Preferindo IPv6";
+                }else{
+                    document.getElementById("ipShow-danger").innerHTML = "Preferindo IPv4";
+                }
+            }
+        </script>
+        <script type="application/javascript" src="https://ip.seeip.org/jsonip?callback=getIP"></script>
 
+        <script type="text/javascript">
+                let url = 'https://ip.seeip.org/geoip';
+                let obj = JSON.parse(url);
+                document.getElementById("orgShow-success").innerHTML = 'ASN: ' + obj.asn + ' - ' + obj.organization;
+        </script>
     </main>
 </body>
     <!-- Footer -->
     <footer class="text-center text-white fixed-botton" style="background-color:#212124;">
     <!-- Copyright -->
-            <div class="text-center pb-4" style="background-color:rgba(0, 0, 0, 0.2);font-size:0.8em;">
-                        <?php echo date("Y"); ?> Copyright:
-                    <a class="text-white" href="https://alfa.net.py/">Alfa.net.py</a>
+            <div class="text-center pb-4" style="background-color:rgba(0, 0, 0, 0.2);font-size:0.7em;">
+                <a class="text-white-50" href="https://latency.com.br/">Latency - <span id="copyright"></span></a>
+                <br />
+                <a class="text-white-50" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br />Este obra está licenciado com uma Licença <a class="text-white-50" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Atribuição-Compartilha Igual 4.0 Internacional</a>.
             </div>
     <!-- Copyright -->
-
+    <script>
+        const dt = new Date();
+        document.getElementById("copyright").innerHTML = dt.getFullYear();
+    </script>
     </footer>
     <!-- Footer -->
 </html>
