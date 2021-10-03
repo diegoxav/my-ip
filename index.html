@@ -121,10 +121,19 @@
         <script type="application/javascript" src="https://ip.seeip.org/jsonip?callback=getIP"></script>
 
         <script type="text/javascript">
-                let url = 'https://ip.seeip.org/geoip';
-                let obj = JSON.parse(url);
-                document.getElementById("orgShow-success").innerHTML = 'ASN: ' + obj.asn + ' - ' + obj.organization;
+                function getOrganization(){
+                    fetch('https://ip.seeip.org/geoip').then((res) => res.json()).then((data) => {
+                        document.getElementById("orgShow-success").innerHTML = 'ASN: ' + data.asn + ' - ' + data.organization;
+                        //console.log(data)
+                    })
+                        .catch((error) => {
+                        console.log(`Erro na busca de dados : ${error}`)
+                        document.getElementById('orgShow-succes').innerHTML = 'Não disponível'
+                        })
+                }
+                getOrganization()
         </script>
+
     </main>
 </body>
     <!-- Footer -->
